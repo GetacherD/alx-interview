@@ -6,9 +6,9 @@ Pascal Triangle
 
 def pascal_triangle(n):
     """Generate Pascal Triangle"""
-    prev = []
+    prev = [1]
     if (n <= 0):
-        yield []
+        return []
     yield [1]
     for i in range(n - 1):
         next = [1]
