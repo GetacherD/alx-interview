@@ -6,6 +6,8 @@ LOck Box
 
 def canUnlockAll(boxes):
     """ check if we can unlock all boxes"""
+    if (boxes == [[]]):
+        return False
     set_prev = set(boxes[0])
     set_prev.add(0)
     set_next = set_prev.copy()
