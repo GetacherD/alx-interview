@@ -8,20 +8,23 @@ def canUnlockAll(boxes):
     """ check if we can unlock all boxes"""
     if (boxes == [[]]):
         return False
-    set_prev = set(boxes[0])
-    set_prev.add(0)
-    set_next = set_prev.copy()
-    len_prev = len(set_prev)
-    len_next = len(set_next)
+    visited = set(boxes[0])
+    visited.add(0)
+    keys = set(boxes[0])
+    tmp = set()
+    len_visited = len(visited)
     while True:
-        for i in set_next:
-            for key in boxes[i]:
-                set_prev.add(key)
-        len_next = len(set_prev)
-        if (len_next == len_prev):
+        for key in keys:
+            for k in boxes[key]:
+                tmp.add(k)
+                visited.add(k)
+        if len(tmp) == 0:
             break
-        set_next = set_prev.copy()
-        len_prev = len(set_prev)
-    if len(set_prev) == len(boxes):
+        if (len(visited) == len_visited):
+            break
+        keys = tmp.copy()
+        tmp = set()
+        len_visited = len(visited)
+    if len(visited) == len(boxes):
         return True
     return False
