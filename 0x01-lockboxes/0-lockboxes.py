@@ -6,8 +6,7 @@ LOck Box
 
 def canUnlockAll(boxes):
     """ check if we can unlock all boxes"""
-    if (boxes == [[]]):
-        return False
+    size = len(boxes)
     visited = set(boxes[0])
     visited.add(0)
     keys = set(boxes[0])
@@ -15,6 +14,8 @@ def canUnlockAll(boxes):
     len_visited = len(visited)
     while True:
         for key in keys:
+            if (key >= size):
+                continue
             for k in boxes[key]:
                 tmp.add(k)
                 visited.add(k)
