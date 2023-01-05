@@ -19,7 +19,10 @@ def canUnlockAll(boxes):
         for key in keys:
             if (key >= size):
                 continue
+            print("used key", key)
             for k in boxes[key]:
+                if (k >= size):
+                    continue
                 tmp.add(k)
                 visited.add(k)
         if len(tmp) == 0:
@@ -29,6 +32,8 @@ def canUnlockAll(boxes):
         keys = tmp.copy()
         tmp = set()
         len_visited = len(visited)
+    print(visited)
+    print(boxes)
     if len(visited) == len(boxes):
         return True
     return False
