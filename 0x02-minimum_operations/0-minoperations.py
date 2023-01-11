@@ -13,15 +13,17 @@ def minOperations(n):
     def is_prime(n):
         if n == 2:
             return True
-        for i in range(2, n // 2 + 1, 1):
+        for i in range(2, int(round(n ** 0.5)) + 1, 1):
             if n % i == 0:
                 return False
         return True
-    for i in range(2, 1 + n // 2, 1):
+    for i in range(2, 1 + int(round(n**0.5)), 1):
         if n % i == 0:
             if is_prime(i) or i == 2:
                 factors.append(i)
-    res = factors.copy()
+    res = []
+    for i in factors:
+        res.append(i)
     if res == [] and is_prime(n):
         return n
     if n == 2:
@@ -31,4 +33,10 @@ def minOperations(n):
         while n % (factor ** i) == 0:
             res.append(factor)
             i += 1
-    return sum(res)
+    final = res.copy()
+    mul = 1
+    for i in res:
+        mul *= i
+    if mul != 1:
+        final.append(n // mul)
+    return sum(final)
