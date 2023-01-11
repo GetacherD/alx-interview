@@ -37,6 +37,7 @@ def minOperations(n):
     mul = 1
     for i in res:
         mul *= i
-    if mul != 1:
+    if (n // mul) != 1:
         final.append(n // mul)
-    return sum(final)
+        return sum(final)
+    return sum(res)
