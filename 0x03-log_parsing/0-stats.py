@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+Read from std in parse
+"""
 import sys
 
 data = {"200": 0, "301": 0, "400": 0, "401": 0,
