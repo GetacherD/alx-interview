@@ -20,14 +20,15 @@ while True:
             break
         if count == 10:
             print(f"File size: {size}")
-            for key, val in data.items():
-                if val:
-                    print(f"{key}: {val}")
+            for key in sorted(data.keys()):
+                if data[key]:
+                    print(f"{key}: {data[key]}")
                     data[key] = 0
             count = 0
         count += 1
         stat = line.split(" ")[-2]
-        data[str(stat)] += 1
+        if stat in data.keys():
+            data[str(stat)] += 1
     except KeyboardInterrupt:
         print(f"File size: {size}")
         for key, val in data.items():
