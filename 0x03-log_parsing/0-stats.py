@@ -3,7 +3,7 @@
 Read from std in parse
 """
 import sys
-import asyncio
+import re
 
 
 def ReadAll():
@@ -15,6 +15,10 @@ def ReadAll():
     while True:
         try:
             line = sys.stdin.readline()
+            regex = """^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])[.]){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]) - .* [\"]GET /projects/260 HTTP/1[.]1[\"] (200|301|400|401|403|404|405|500) [0-9]*"""
+            r = re.search(regex, line)
+            if not r:
+                continue
             size += int(line.split(" ")[-1][0:-1])
             if "Exit".upper() == line.rstrip().upper() or not line:
                 print(f"File size: {size}")
@@ -42,4 +46,4 @@ def ReadAll():
 
 
 if __name__ == "__main__":
-    asyncio.run(ReadAll())
+    ReadAll()
