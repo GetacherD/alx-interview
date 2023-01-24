@@ -7,7 +7,8 @@ Validate UTF-8
 def validUTF8(data):
     """ validate UTF-8"""
     try:
-        bytes(data).decode("UTF-8")
+        bitsarr = [i & 255 for i in data]
+        bytes(bitsarr).decode("UTF-8")
         return True
     except Exception:
         return False
