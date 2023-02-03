@@ -20,7 +20,7 @@ board = [[0 for i in range(N)] for j in range(N)]
 
 def is_safe(row, col):
     """ Check if placing on cell i, j is OK"""
-    for i in range(row):
+    for i in range(N):
         if board[row][i] == 1 or board[i][col] == 1:
             return False
     x = row - 1
