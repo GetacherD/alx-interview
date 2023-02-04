@@ -49,7 +49,7 @@ if __name__ == "__main__":
             if is_safe(row, j):
                 board[row][j] = 1
                 if NQueen(row + 1, n - 1):
-                    sol.append([row, j])
+                    sol.insert(0, [row, j])
                     return True
                 board[row][j] = 0
         return False
