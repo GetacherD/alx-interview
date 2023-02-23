@@ -17,14 +17,13 @@ def makeChange(coins, total):
             return
         if res:
             return
-        if index < len(candidates):
-            val = candidates[index]
+        for i in range(index, len(candidates)):
+            val = candidates[i]
             cur.append(val)
-            combSum(candidates, target - val, index, cur, res)
-            cur.pop()
-            combSum(candidates, target, index + 1, cur, res)
+            combSum(candidates, target - val, i, cur, res)
+            last = cur.pop()
         return res
-    res = combSum(sorted(coins, reverse=True), total, 0, [], [])
+    res = combSum(sorted(list(set(coins)), reverse=True), total, 0, [], [])
     if res:
         return len(res[0])
     return -1
