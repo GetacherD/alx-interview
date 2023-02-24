@@ -10,20 +10,20 @@ stack = []
 def solve(ls, total, i):
     """ helper solve function """
     global stack
-    if total == 0:
-        return
-    if i >= len(ls):
-        stack = []
-        return
-    if total > 0:
-        stack.append(ls[i])
-        total -= ls[i]
-        solve(ls, total, i)
-    elif total < 0:
-        stack.pop()
-        total += ls[i]
-        i += 1
-        solve(ls, total, i)
+
+    while True:
+        if total == 0:
+            break
+        if i >= len(ls):
+            stack = []
+            break
+        while total > 0:
+            stack.append(ls[i])
+            total -= ls[i]
+        while total < 0:
+            stack.pop()
+            total += ls[i]
+            i += 1
 
 
 def makeChange(coins, total):
