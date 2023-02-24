@@ -33,7 +33,7 @@ def makeChange(coins, total):
         return 0
     coins = sorted(list(set(coins)), reverse=True)
     k = 0
-    while total < coins[k]:
+    while k < len(coins) and total < coins[k]:
         k += 1
     for i in range(k, len(coins)):
         solve(coins, total, i)
