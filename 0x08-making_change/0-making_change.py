@@ -29,7 +29,7 @@ def solve(ls, total, i):
 def makeChange(coins, total):
     """ make changes """
     global stack
-    if total == 0:
+    if total <= 0:
         return 0
     coins = sorted(list(set(coins)), reverse=True)
     solve(coins, total, 0)
