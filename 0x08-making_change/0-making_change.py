@@ -32,11 +32,8 @@ def makeChange(coins, total):
     if total <= 0:
         return 0
     coins = sorted(list(set(coins)), reverse=True)
-    i = 0
-    while total // coins[i] <= 0:
-        i += 1
-    for k in range(i, len(coins)):
-        solve(coins, total, k)
+    for i in range(len(coins)):
+        solve(coins, total, i)
         if stack:
             break
     if stack == []:
