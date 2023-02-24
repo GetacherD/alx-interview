@@ -6,13 +6,14 @@ Make changes
 
 stack = []
 
+
 def solve(ls, total, i):
     """ helper solve function """
-    global  stack
+    global stack
     if total == 0:
         return
     if i >= len(ls):
-        stack =[]
+        stack = []
         return
     if total > 0:
         stack.append(ls[i])
@@ -28,6 +29,10 @@ def solve(ls, total, i):
 def makeChange(coins, total):
     """ make changes """
     global stack
-    ls = sorted(list(set(ls)), reverse=True)
-    solve(ls, total, 0)
-    return  len(stack)
+    if total == 0:
+        return 0
+    coins = sorted(list(set(coins)), reverse=True)
+    solve(coins, total, 0)
+    if stack == []:
+        return -1
+    return len(stack)
