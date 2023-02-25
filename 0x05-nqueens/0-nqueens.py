@@ -20,8 +20,8 @@ if __name__ == "__main__":
 
     def is_safe(row, col):
         """ Check if placing on cell i, j is OK"""
-        for i in range(N):
-            if board[row][i] == 1 or board[i][col] == 1:
+        for i in range(row):
+            if board[i][col]:
                 return False
         x = row - 1
         y = col + 1
@@ -41,28 +41,51 @@ if __name__ == "__main__":
 
     sol = []
 
-    def NQueen(row, n):
+    def NQueen(col):
         """ main nqueen backtracking algorithm"""
-        if n == 0:
-            return True
-        for j in range(N):
-            if is_safe(row, j):
-                board[row][j] = 1
-                if NQueen(row + 1, n - 1):
-                    sol.insert(0, [row, j])
-                    return True
-                board[row][j] = 0
-        return False
-
-    def reset_board():
-        ''' reset board '''
+        row = 1
+        placed = False
+        prev = col
+        col = 0
         global board
-        board = [[0 for _ in range(N)] for _ in range(N)]
+        board[0][prev] = 1
+        while True:
+            for i in range(col, N):
+                if is_safe(row, i):
+                    board[row][i] = 1
+                    prev = i
+                    placed = True
+                    break
+            if placed:
+                col = 0
+                if row == N - 1:
+                    return board
+                row += 1
+                placed = False
+            else:
+                col = prev + 1
+                row -= 1
+                board[row][prev] = 0
+                placed = False
+                for k in range(N):
+                    if board[row - 1][k]:
+                        prev = k
+            if row < 1:
+                return []
+            if row >= N:
+                return []
 
+    def reset():
+        global board
+        board = [[0 for i in range(N)] for j in range(N)]
     for i in range(N):
-        reset_board()
-        board[0][i] = 1
-        if NQueen(1, N - 1):
-            sol.insert(0, [0, i])
-            print(sol)
-            sol = []
+        candidate = NQueen(i)
+        data = []
+        if candidate:
+            for k in range(N):
+                for m in range(N):
+                    if candidate[k][m]:
+                        data.append([k, m])
+        if data:
+            print(data)
+        reset()
