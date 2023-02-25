@@ -2,6 +2,7 @@
 """ N- Queens backTracing """
 import sys
 
+
 if __name__ == "__main__":
 
     if len(sys.argv) < 2 or len(sys.argv) > 2:
@@ -41,51 +42,32 @@ if __name__ == "__main__":
 
     sol = []
 
-    def NQueen(col):
+    def NQueen(i, j, n):
         """ main nqueen backtracking algorithm"""
-        row = 1
-        placed = False
-        prev = col
-        col = 0
         global board
-        board[0][prev] = 1
-        while True:
-            for i in range(col, N):
-                if is_safe(row, i):
-                    board[row][i] = 1
-                    prev = i
-                    placed = True
-                    break
-            if placed:
-                col = 0
-                if row == N - 1:
-                    return board
-                row += 1
-                placed = False
+        if n == 0:
+            cand = []
+            for row in range(N):
+                for col in range(N):
+                    if board[row][col]:
+                        cand.append([row, col])
+            print(cand)
+            cand = []
+            return True
+        if j >= N:
+            return False
+        if is_safe(i, j):
+            board[i][j] = 1
+            if NQueen(i + 1, 0, n - 1):
+                board[i][j] = 0
+                NQueen(i, j + 1, n)
             else:
-                col = prev + 1
-                row -= 1
-                board[row][prev] = 0
-                placed = False
-                for k in range(N):
-                    if board[row - 1][k]:
-                        prev = k
-            if row < 1:
-                return []
-            if row >= N:
-                return []
+                board[i][j] = 0
+                NQueen(i, j + 1, n)
+        else:
+            NQueen(i, j + 1, n)
 
     def reset():
         global board
         board = [[0 for i in range(N)] for j in range(N)]
-    for i in range(N):
-        candidate = NQueen(i)
-        data = []
-        if candidate:
-            for k in range(N):
-                for m in range(N):
-                    if candidate[k][m]:
-                        data.append([k, m])
-        if data:
-            print(data)
-        reset()
+    NQueen(0, 0, N)
