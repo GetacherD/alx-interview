@@ -8,7 +8,9 @@ store all possible prime numbers
 
 
 def isWinner(x, nums):
+    """check who is all round winner"""
     def is_prime(number):
+        """ calculate prime numbers"""
         upper = int((number ** 0.5)) + 1
         for factor in range(2, upper):
             if number % factor == 0:
